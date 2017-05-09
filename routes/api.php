@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +14,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+//Rutas protegidas por autenticacion
+Route::group(['prefix' => 'user' ,  'middleware' => ['jwt.auth'] ], function() {
+    Route::get('/dashboard', 'ApiController@userDashboard');
+});
+
+ Route::post('/register','ApiController@register');
+ Route::post('/login', 'ApiController@login');
+ Route::get('/logout', 'ApiController@logout');
+
+
