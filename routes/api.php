@@ -17,6 +17,9 @@ use Illuminate\Http\Request;
 //Rutas protegidas por autenticacion
 Route::group(['prefix' => 'user' ,  'middleware' => ['jwt.auth'] ], function() {
     Route::get('/dashboard', 'ApiController@userDashboard');
+    Route::get('/tareas', 'ApiController@getTareas');
+    Route::post('/tareas/create', 'ApiController@createTareas');
+    Route::post('/tareas/delete/{id}', 'ApiController@deleteTareas');
 });
 
  Route::post('/register','ApiController@register');
